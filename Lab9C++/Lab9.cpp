@@ -34,12 +34,12 @@ public:
 class Character {
 private:
     std::string name;
-    int health, attack, defense, level, experience;
+    int health, attack, defense;
     Inventory inventory;
 
 public:
     Character(const std::string& n, int h, int a, int d)
-        : name(n), health(h), attack(a), defense(d), level(1), experience(0) {}
+        : name(n), health(h), attack(a), defense(d) {}
 
     void takeDamage(int dmg) {
         health -= dmg;
@@ -49,31 +49,10 @@ public:
     }
     
     void attackEnemy(class Enemy& monster);
-    
-    void gainExperience(int exp) {
-        experience += exp;
-        if (experience >= 100) {
-            level++;
-            experience -= 100;
-            std::cout << name << " повысил уровень до " << level << "!" << std::endl;
-            Logger<std::string>::log(name + " повысил уровень до " + std::to_string(level));
-        }
-    }
-    
-    void heal(int amount) {
-        health += amount;
-        if (health > 100) {
-            health = 100;
-        }
-        std::cout << name << " восстановил " << amount << " HP!" << std::endl;
-        Logger<std::string>::log(name + " восстановил " + std::to_string(amount) + " HP");
-    }
-
 
     void displayInfo() const {
         std::cout << "Имя: " << name << ", HP: " << health
-                  << ", Атака: " << attack << ", Защита: " << defense
-                  << ", Уровень: " << level << ", Опыт: " << experience << std::endl;
+                  << ", Атака: " << attack << ", Защита: " << defense << std::endl;
     }
 
     void showInventory() const {
